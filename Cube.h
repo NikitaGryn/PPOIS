@@ -32,5 +32,11 @@ private:
 	void swapAdjacentX(Side side);
 	void inverseAdjacentX(Side side);
 	Color sides[6][3][3];
+	void UpMove(bool stroke);
+	void DownMove(bool stroke);
+	void RightMove(bool stroke);
+	void LeftMove(bool stroke);
+	void FrontMove(bool stroke);
+	void BackMove(bool stroke);
 };
 

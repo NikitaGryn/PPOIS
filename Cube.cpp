@@ -106,61 +106,85 @@ string Cube::ToString() {
 	return str;
 }
 
+void Cube::UpMove(bool stroke) {
+	swapAdjacentZ(Side::Up);
+	if (stroke) {
+		reverseTurn(Side::Up);
+		inverseAdjacentZ(Side::Up);
+		return;
+	}
+	turn(Side::Up);
+}
+
+void Cube::DownMove(bool stroke) {
+	swapAdjacentZ(Side::Down);
+	if (stroke) {
+		reverseTurn(Side::Down);
+		return;
+	}
+	inverseAdjacentZ(Side::Down);
+	turn(Side::Down);
+}
+
+void Cube::RightMove(bool stroke) {
+	swapAdjacentX(Side::Right);
+	if (stroke) {
+		reverseTurn(Side::Right);
+		inverseAdjacentX(Side::Right);
+		return;
+	}
+	turn(Side::Right);
+}
+
+void Cube::LeftMove(bool stroke) {
+	swapAdjacentX(Side::Left);
+	if (stroke) {
+		reverseTurn(Side::Left);
+		return;
+	}
+	inverseAdjacentX(Side::Left);
+	turn(Side::Left);
+}
+
+void Cube::FrontMove(bool stroke) {
+	swapAdjacentY(Side::Front);
+	if (stroke) {
+		reverseTurn(Side::Front);
+		inverseAdjacentY(Side::Front);
+		return;
+	}
+	turn(Side::Front);
+}
+
+void Cube::BackMove(bool stroke) {
+	swapAdjacentY(Side::Back);
+	if (stroke) {
+		reverseTurn(Side::Back);
+		return;
+	}
+	inverseAdjacentY(Side::Back);
+	turn(Side::Back);
+}
+
 void Cube::MakeMove(Moves move, bool stroke) {
 	switch (move) {
 	case Moves::U:
-		swapAdjacentZ(Side::Up);
-		if (stroke) {
-			reverseTurn(Side::Up);
-			inverseAdjacentZ(Side::Up);
-			return;
-		}
-		turn(Side::Up);
+		UpMove(stroke);
 		break;
 	case Moves::D:
-		swapAdjacentZ(Side::Down);
-		if (stroke) {
-			reverseTurn(Side::Down);
-			return;
-		}
-		inverseAdjacentZ(Side::Down);
-		turn(Side::Down);
+		DownMove(stroke);
 		break;
 	case Moves::R:
-		swapAdjacentX(Side::Right);
-		if (stroke) {
-			reverseTurn(Side::Right);
-			inverseAdjacentX(Side::Right);
-			return;
-		}
-		turn(Side::Right);
+		RightMove(stroke);
 		break;
 	case Moves::L:
-		swapAdjacentX(Side::Left);
-		if (stroke) {
-			reverseTurn(Side::Left);
-			return;
-		}
-		inverseAdjacentX(Side::Left);
-		turn(Side::Left);
+		LeftMove(stroke);
 		break;
 	case Moves::F:
-		swapAdjacentY(Side::Front);
-		if (stroke) {
-			reverseTurn(Side::Front);
-			inverseAdjacentY(Side::Front);
-			return;
-		}
-		turn(Side::Front);
+		FrontMove(stroke);
 		break;
 	case Moves::B:
-		swapAdjacentY(Side::Back);
-		if (stroke) {
-			reverseTurn(Side::Back);
-			return;
-		}
-		inverseAdjacentY(Side::Back);
-		turn(Side::Back);
+		BackMove(stroke);
 		break;
 	}
 }
